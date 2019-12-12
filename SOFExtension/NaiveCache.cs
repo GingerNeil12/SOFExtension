@@ -13,7 +13,7 @@ namespace SOFExtension
 			if( _cache == null ) {
 				_cache = new Dictionary<string, CacheModel>();
 			}
-
+			model.Query.Trim();
 			if( !_cache.ContainsKey( model.Query ) ) {
 				_cache.Add( model.Query, model );
 			}
@@ -26,7 +26,7 @@ namespace SOFExtension
 			}
 
 			var model = new CacheModel();
-			if( _cache.TryGetValue( query, out model ) ) {
+			if( _cache.TryGetValue( query.Trim(), out model ) ) {
 				var timeDifference = model.AddedOn.Hour - DateTime.Now.Hour;
 				if( timeDifference >= 1 ) {
 					Remove( query );
