@@ -31,6 +31,14 @@ namespace SOFExtension.ToolWindows
 			InitializeItemSource();
 		}
 
+		public SOFMainWindowControl(string query)
+		{
+			InitializeComponent();
+			var model = NaiveCache.GetSearchModel(query);
+			txtSearch.Text = query;
+			icSearchItems.ItemsSource = model.Items;
+		}
+
 		private void InitializeItemSource()
 		{
 			SearchItems = new List<SOFSearchModel.Item>();
@@ -51,42 +59,6 @@ namespace SOFExtension.ToolWindows
 				"SOFMainWindow" );
 		}
 
-		private async Task LoadFromStackoverflow()
-		{
-			var stringResult = string.Empty;
-			var handler = new HttpClientHandler() {
-				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-			};
-			using( _client = new HttpClient( handler ) ) {
-				_client.BaseAddress = new Uri( "https://api.stackexchange.com/2.2/" );
-				var uri = $"search?order=desc&sort=activity&site=stackoverflow&intitle={txtSearch.Text}";
-				var responseMessage = await _client.GetAsync( uri );
-				using( var stream = await responseMessage.Content.ReadAsStreamAsync() ) {
-					using( var streamReader = new StreamReader( stream ) ) {
-						stringResult = await streamReader.ReadToEndAsync();
-					}
-				}
-			}
-			var result = JsonConvert.DeserializeObject<SOFSearchModel>( stringResult );
-			DecodeHtmlEntities( result.Items );
-		}
-
-		private void DecodeHtmlEntities( List<SOFSearchModel.Item> items )
-		{
-			using( var writer = new StringWriter() ) {
-				foreach( var item in items ) {
-					item.Title = WebUtility.HtmlDecode( item.Title );
-				}
-			}
-			icSearchItems.ItemsSource = items;
-			var cache = new CacheModel() {
-				Query = txtSearch.Text,
-				Items = items,
-				AddedOn = DateTime.Now
-			};
-			NaiveCache.Create( cache );
-		}
-
 		private void btnSearch_Click( object sender, RoutedEventArgs e )
 		{
 			if( !string.IsNullOrWhiteSpace( txtSearch.Text ) ) {
@@ -98,12 +70,60 @@ namespace SOFExtension.ToolWindows
 
 		private bool LoadFromCache()
 		{
-			var result = NaiveCache.Get( txtSearch.Text );
+			var result = NaiveCache.GetSearchModel( txtSearch.Text );
 			if( result == null ) {
 				return false;
 			}
 			icSearchItems.ItemsSource = result.Items;
 			return true;
+		}
+
+		private async Task LoadFromStackoverflow()
+		{
+			var stringResult = string.Empty;
+			var handler = new HttpClientHandler()
+			{
+				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+			};
+			using (_client = new HttpClient(handler))
+			{
+				_client.BaseAddress = new Uri("https://api.stackexchange.com/2.2/");
+				var uri = $"search?order=desc&sort=activity&site=stackoverflow&intitle={txtSearch.Text}";
+				var responseMessage = await _client.GetAsync(uri);
+				using (var stream = await responseMessage.Content.ReadAsStreamAsync())
+				{
+					using (var streamReader = new StreamReader(stream))
+					{
+						stringResult = await streamReader.ReadToEndAsync();
+					}
+				}
+			}
+			var result = JsonConvert.DeserializeObject<SOFSearchModel>(stringResult);
+			DecodeHtmlEntities(result.Items);
+		}
+
+		private void DecodeHtmlEntities(List<SOFSearchModel.Item> items)
+		{
+			using (var writer = new StringWriter())
+			{
+				foreach (var item in items)
+				{
+					item.Title = WebUtility.HtmlDecode(item.Title);
+				}
+			}
+			icSearchItems.ItemsSource = items;
+			AddToCache(items);
+		}
+
+		private void AddToCache(List<SOFSearchModel.Item> items)
+		{
+			var cache = new SearchCacheModel()
+			{
+				Query = txtSearch.Text,
+				Items = items,
+				AddedOn = DateTime.Now
+			};
+			NaiveCache.AddSearchModel(cache);
 		}
 
 		private void Hyperlink_RequestNavigate( object sender, System.Windows.Navigation.RequestNavigateEventArgs e )
@@ -113,6 +133,13 @@ namespace SOFExtension.ToolWindows
 				Verb = "open"
 			};
 			Process.Start( ps );
+		}
+
+		private void btnView_Click(object sender, RoutedEventArgs e)
+		{
+			var value = ((Button)sender).Tag;
+			var viewDetail = new ViewDetail((long)value, txtSearch.Text);
+			this.Content = viewDetail;
 		}
 	}
 }

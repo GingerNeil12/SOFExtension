@@ -45,7 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Models\CacheModel.cs" />
+    <Compile Include="Models\QuestionCacheModel.cs" />
+    <Compile Include="Models\SearchCacheModel.cs" />
+    <Compile Include="Models\SOFAnswerModel.cs" />
+    <Compile Include="Models\SOFQuestionModel.cs" />
     <Compile Include="Models\SOFSearchModel.cs" />
     <Compile Include="NaiveCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +57,9 @@
     <Compile Include="ToolWindows\SOFMainWindowCommand.cs" />
     <Compile Include="ToolWindows\SOFMainWindowControl.xaml.cs">
       <DependentUpon>SOFMainWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolWindows\ViewDetail.xaml.cs">
+      <DependentUpon>ViewDetail.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +87,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="ToolWindows\SOFMainWindowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolWindows\ViewDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

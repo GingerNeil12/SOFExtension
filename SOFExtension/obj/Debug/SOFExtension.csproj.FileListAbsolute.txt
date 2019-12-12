@@ -48,3 +48,6 @@ C:\Users\neil.earlam.INTERNAL\source\repos\SOFExtension\SOFExtension\obj\Debug\S
 C:\Users\neil.earlam.INTERNAL\source\repos\SOFExtension\SOFExtension\obj\Debug\extension.vsixmanifest
 C:\Users\neil.earlam.INTERNAL\source\repos\SOFExtension\SOFExtension\obj\Debug\files.json
 C:\Users\neil.earlam.INTERNAL\source\repos\SOFExtension\SOFExtension\obj\Debug\createTemplateManifests.cache
+D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\ToolWindows\ViewDetail.g.cs
+D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\SOFExtension_MarkupCompile.lref
+D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\ToolWindows\ViewDetail.baml

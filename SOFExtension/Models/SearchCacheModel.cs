@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SOFExtension.Models
 {
-	public class CacheModel
+	public class SearchCacheModel
 	{
 		public string Query { get; set; }
 		public List<SOFSearchModel.Item> Items { get; set; }
