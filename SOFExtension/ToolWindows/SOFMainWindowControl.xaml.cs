@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Net;
+using SOFExtension.Services;
 
 namespace SOFExtension.ToolWindows
 {
@@ -20,7 +21,7 @@ namespace SOFExtension.ToolWindows
 	{
 		public List<SOFSearchModel.Item> SearchItems { get; set; }
 
-		private HttpClient _client;
+		private Client _client;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SOFMainWindowControl"/> class.
@@ -41,6 +42,7 @@ namespace SOFExtension.ToolWindows
 
 		private void InitializeItemSource()
 		{
+			_client = new Client();
 			SearchItems = new List<SOFSearchModel.Item>();
 			icSearchItems.ItemsSource = SearchItems;
 		}
@@ -80,36 +82,14 @@ namespace SOFExtension.ToolWindows
 
 		private async Task LoadFromStackoverflow()
 		{
-			var stringResult = string.Empty;
-			var handler = new HttpClientHandler()
-			{
-				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-			};
-			using (_client = new HttpClient(handler))
-			{
-				_client.BaseAddress = new Uri("https://api.stackexchange.com/2.2/");
-				var uri = $"search?order=desc&sort=activity&site=stackoverflow&intitle={txtSearch.Text}";
-				var responseMessage = await _client.GetAsync(uri);
-				using (var stream = await responseMessage.Content.ReadAsStreamAsync())
-				{
-					using (var streamReader = new StreamReader(stream))
-					{
-						stringResult = await streamReader.ReadToEndAsync();
-					}
-				}
-			}
-			var result = JsonConvert.DeserializeObject<SOFSearchModel>(stringResult);
+			var result = await _client.GetSearchResultsAsync( txtSearch.Text );
 			DecodeHtmlEntities(result.Items);
 		}
 
 		private void DecodeHtmlEntities(List<SOFSearchModel.Item> items)
 		{
-			using (var writer = new StringWriter())
-			{
-				foreach (var item in items)
-				{
-					item.Title = WebUtility.HtmlDecode(item.Title);
-				}
+			foreach ( var item in items ) {
+				item.Title = WebUtility.HtmlDecode( item.Title );
 			}
 			icSearchItems.ItemsSource = items;
 			AddToCache(items);

@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SOFExtension.Models
 {
@@ -12,7 +9,14 @@ namespace SOFExtension.Models
 
         public class Answer
         {
+            [JsonProperty( "is_accepted" )]
+            public bool IsAccepted { get; set; }
 
+            [JsonProperty("body_markdown")]
+            public string BodyMarkdown { get; set; }
+
+            public int Score { get; set; }
+            public string Body { get; set; }
         }
     }
 }

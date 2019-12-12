@@ -1,22 +1,12 @@
-﻿using Newtonsoft.Json;
-using SOFExtension.Models;
+﻿using SOFExtension.Models;
+using SOFExtension.Services;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SOFExtension.ToolWindows
 {
@@ -28,15 +18,16 @@ namespace SOFExtension.ToolWindows
         private readonly long _questionId;
         private readonly string _query;
 
+        private Client _client;
+        private SOFQuestionModel.Item Question;
+        public List<SOFAnswerModel.Answer> Answers;
+
         public string Title { get; set; }
         public string Link { get; set; }
         public string Body { get; set; }
         public string BodyMarkdown { get; set; }
         public int AnswerCount { get; set; }
         public int ViewCount { get; set; }
-
-        private SOFQuestionModel.Item Question { get; set; }
-        public List<SOFAnswerModel> Answers { get; set; }
 
         public ViewDetail(long questionId, string query)
         {
@@ -51,7 +42,8 @@ namespace SOFExtension.ToolWindows
 
         private void InitializeBindings()
         {
-            Answers = new List<SOFAnswerModel>();
+            _client = new Client();
+            Answers = new List<SOFAnswerModel.Answer>();
         }
 
         private void OnStart()
@@ -73,39 +65,38 @@ namespace SOFExtension.ToolWindows
         }
 
         private async Task LoadQuestionFromStackoverflow()
-        {
-            var stringResponse = string.Empty;
-            var handler = new HttpClientHandler() {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            };
-            using(var client = new HttpClient(handler)) {
-                client.BaseAddress = new Uri("https://api.stackexchange.com/2.2/");
-                var uri = $"questions/{_questionId}?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wwK0y";
-                var responseMessage = await client.GetAsync(uri);
-                using(var stream = await responseMessage.Content.ReadAsStreamAsync()) {
-                    using(var reader = new StreamReader(stream)) {
-                        stringResponse = await reader.ReadToEndAsync();
-                    }
-                }
-            }
-            var list = JsonConvert.DeserializeObject<SOFQuestionModel>(stringResponse);
-            var model = list.Items.FirstOrDefault();
-            model = HtmlParser(model);
-            Question = model;
+        { 
+            var result = await _client.GetQuestionResultAsync( _questionId );
+           
+            var model = result.Items.FirstOrDefault();
+            model = HtmlParser( model );
             Title = model.Title;
+            Link = model.Link;
             Body = model.Body;
             BodyMarkdown = model.BodyMarkdown;
             AnswerCount = model.AnswerCount;
             ViewCount = model.ViewCount;
-            Link = model.Link;
+
+            QuestionCacheModel cacheModel = new QuestionCacheModel() {
+                QuestionId = model.QuestionId,
+                AddedOn = DateTime.Now,
+                Question = model
+            };
+
+            LoadAnswersFromStackoverflow( cacheModel );
+        }
+
+        private async Task LoadAnswersFromStackoverflow(QuestionCacheModel cacheModel)
+        {
+            var result = await _client.GetAnswersResultAsync( _questionId );
+            // Append to the item control
+            cacheModel.Answers = result.Items;
+            NaiveCache.AddQuestionModel( cacheModel );
         }
 
         private SOFQuestionModel.Item HtmlParser(SOFQuestionModel.Item model)
         {
-            using(var writer = new StringWriter())
-            {
-                model.Title = WebUtility.HtmlDecode(model.Title);
-            }
+            model.Title = WebUtility.HtmlDecode( model.Title );
             return model;
         }
 

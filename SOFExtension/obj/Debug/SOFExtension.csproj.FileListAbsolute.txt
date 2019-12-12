@@ -51,3 +51,31 @@ C:\Users\neil.earlam.INTERNAL\source\repos\SOFExtension\SOFExtension\obj\Debug\c
 D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\ToolWindows\ViewDetail.g.cs
 D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\SOFExtension_MarkupCompile.lref
 D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\ToolWindows\ViewDetail.baml
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\bin\Debug\SOFExtension.dll
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\bin\Debug\SOFExtension.pdb
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\bin\Debug\SOFExtension.pkgdef
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\bin\Debug\SOFExtension.vsix
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\bin\Debug\extension.vsixmanifest
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.csprojAssemblyReference.cache
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\ToolWindows\SOFMainWindowControl.baml
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\ToolWindows\SOFMainWindowControl.g.cs
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\ToolWindows\ViewDetail.g.cs
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension_MarkupCompile.cache
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension_MarkupCompile.lref
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\ToolWindows\ViewDetail.baml
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.g.resources
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\_EmptyResource.resources
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.csproj.GenerateResource.cache
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtensionPackage.cto
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\VSCT.read.1.tlog
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\VSCT.write.1.tlog
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\resources.json
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\ctoFiles.json
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\mergeCto.cache
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.dll
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.pdb
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.pkgdef
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\SOFExtension.latest.pkgdef
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\extension.vsixmanifest
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\files.json
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\createTemplateManifests.cache

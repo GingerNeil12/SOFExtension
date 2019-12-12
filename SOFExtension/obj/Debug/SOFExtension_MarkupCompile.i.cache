@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\Projects\C#\SOFExtension\SOFExtension\obj\Debug\
+C:\Users\neile\OneDrive\Documents\Visual Studio 2019\Projects\SOFExtension\SOFExtension\obj\Debug\
 SOFExtension
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 2-1360317768
 1-793034367
-13-1101026577
-227-313206332
+14-2117827083
+227-685224497
 ToolWindows\SOFMainWindowControl.xaml;ToolWindows\ViewDetail.xaml;
 
 False

@@ -21,7 +21,7 @@ namespace SOFExtension
 			}
 		}
 
-		private static void AddQuestionModel(QuestionCacheModel model)
+		public static void AddQuestionModel(QuestionCacheModel model)
 		{
 			if(_questionCache == null) {
 				_questionCache = new Dictionary<long, QuestionCacheModel>();

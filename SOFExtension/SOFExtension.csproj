@@ -52,6 +52,7 @@
     <Compile Include="Models\SOFSearchModel.cs" />
     <Compile Include="NaiveCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Client.cs" />
     <Compile Include="SOFExtensionPackage.cs" />
     <Compile Include="ToolWindows\SOFMainWindow.cs" />
     <Compile Include="ToolWindows\SOFMainWindowCommand.cs" />

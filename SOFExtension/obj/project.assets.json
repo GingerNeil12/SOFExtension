@@ -12763,20 +12763,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Neil\\.nuget\\packages\\": {}
+    "C:\\Users\\neile\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\C#\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
+      "projectUniqueName": "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
       "projectName": "SOFExtension",
-      "projectPath": "D:\\Projects\\C#\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
-      "packagesPath": "C:\\Users\\Neil\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\C#\\SOFExtension\\SOFExtension\\obj\\",
+      "projectPath": "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
+      "packagesPath": "C:\\Users\\neile\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Neil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\neile\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
