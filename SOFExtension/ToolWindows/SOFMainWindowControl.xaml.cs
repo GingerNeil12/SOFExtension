@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json;
-using SOFExtension.Models;
+﻿using SOFExtension.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,17 +29,16 @@ namespace SOFExtension.ToolWindows
 			InitializeItemSource();
 		}
 
-		public SOFMainWindowControl(string query)
+		public SOFMainWindowControl( string query )
 		{
 			InitializeComponent();
-			var model = NaiveCache.GetSearchModel(query);
+			var model = NaiveCache.GetSearchModel( query );
 			txtSearch.Text = query;
 			icSearchItems.ItemsSource = model.Items;
 		}
 
 		private void InitializeItemSource()
 		{
-			_client = new Client();
 			SearchItems = new List<SOFSearchModel.Item>();
 			icSearchItems.ItemsSource = SearchItems;
 		}
@@ -82,28 +78,33 @@ namespace SOFExtension.ToolWindows
 
 		private async Task LoadFromStackoverflow()
 		{
+			_client = new Client();
 			var result = await _client.GetSearchResultsAsync( txtSearch.Text );
-			DecodeHtmlEntities(result.Items);
+			DecodeHtmlEntities( result.Items );
 		}
 
-		private void DecodeHtmlEntities(List<SOFSearchModel.Item> items)
+		private void DecodeHtmlEntities( List<SOFSearchModel.Item> items )
 		{
-			foreach ( var item in items ) {
+			foreach( var item in items ) {
 				item.Title = WebUtility.HtmlDecode( item.Title );
 			}
+
+			if( items.Count == 0 ) {
+				MessageBox.Show( "No results found!" );
+			}
+
 			icSearchItems.ItemsSource = items;
-			AddToCache(items);
+			AddToCache( items );
 		}
 
-		private void AddToCache(List<SOFSearchModel.Item> items)
+		private void AddToCache( List<SOFSearchModel.Item> items )
 		{
-			var cache = new SearchCacheModel()
-			{
+			var cache = new SearchCacheModel() {
 				Query = txtSearch.Text,
 				Items = items,
 				AddedOn = DateTime.Now
 			};
-			NaiveCache.AddSearchModel(cache);
+			NaiveCache.AddSearchModel( cache );
 		}
 
 		private void Hyperlink_RequestNavigate( object sender, System.Windows.Navigation.RequestNavigateEventArgs e )
@@ -115,11 +116,22 @@ namespace SOFExtension.ToolWindows
 			Process.Start( ps );
 		}
 
-		private void btnView_Click(object sender, RoutedEventArgs e)
+		private void btnView_Click( object sender, RoutedEventArgs e )
 		{
-			var value = ((Button)sender).Tag;
-			var viewDetail = new ViewDetail((long)value, txtSearch.Text);
+			var value = ( (Button)sender ).Tag;
+			var viewDetail = new ViewDetail( (long)value, txtSearch.Text );
 			this.Content = viewDetail;
+		}
+
+		private void txtSearch_KeyUp( object sender, System.Windows.Input.KeyEventArgs e )
+		{
+			if( e.Key == System.Windows.Input.Key.Enter ) {
+				if( !string.IsNullOrWhiteSpace( txtSearch.Text ) ) {
+					if( !LoadFromCache() ) {
+						LoadFromStackoverflow();
+					}
+				}
+			}
 		}
 	}
 }

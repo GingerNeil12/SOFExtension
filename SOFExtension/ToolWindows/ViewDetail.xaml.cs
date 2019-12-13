@@ -76,6 +76,7 @@ namespace SOFExtension.ToolWindows
 			foreach( var item in result.Items ) {
 				item.BodyMarkdown = HtmlParser( item.BodyMarkdown );
 			}
+			result.Items = result.Items.OrderByDescending( x => x.IsAccepted ).ToList();
 			icAnswers.ItemsSource = result.Items;
 			cacheModel.Answers = result.Items;
 			NaiveCache.AddQuestionModel( cacheModel );

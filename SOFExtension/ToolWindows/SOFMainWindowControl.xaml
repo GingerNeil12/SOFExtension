@@ -11,28 +11,30 @@
              Name="SOFSearch">
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="7*"/>
 		</Grid.RowDefinitions>
 		<StackPanel Orientation="Vertical" Grid.Row="0">
 			<TextBlock Text="SOF Search" HorizontalAlignment="Center" Margin="0 10 0 0"/>
-			<Grid Margin="10 10 10 0">
+			<Grid Margin="10">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="4*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
 				<TextBox Grid.Column="0" 
                          x:Name="txtSearch"
-                         Padding="3"/>
+                         Padding="3"
+						 KeyUp="txtSearch_KeyUp"/>
 				<Button Grid.Column="1" 
                             x:Name="btnSearch" 
                             Content="Search"
-                            Padding="4" Click="btnSearch_Click"/>
+                            Padding="4" 
+							Click="btnSearch_Click"/>
 			</Grid>
 		</StackPanel>
 		<DockPanel Grid.Row="1">
-			<ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-				<ItemsControl x:Name="icSearchItems">
+			<ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="1">
+				<ItemsControl x:Name="icSearchItems" Grid.Row="1">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<Border BorderThickness="1" BorderBrush="DimGray" CornerRadius="10" Padding="10" Margin="5">

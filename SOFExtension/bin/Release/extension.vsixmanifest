@@ -1,0 +1,19 @@
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Id="SOFExtension.942f4525-65d5-415d-986f-fe59fc53084a" Version="1.1" Language="en-US" Publisher="neil.earlam2019" />
+    <DisplayName>SOFExtension</DisplayName>
+    <Description xml:space="preserve">A search extension for StackOverFlow</Description>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.5,)" />
+  </Dependencies>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,17.0)" DisplayName="Visual Studio core editor" />
+  </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="SOFExtension.pkgdef" />
+  </Assets>
+</PackageManifest>
