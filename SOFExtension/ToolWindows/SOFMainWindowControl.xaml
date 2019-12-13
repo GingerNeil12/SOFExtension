@@ -10,74 +10,73 @@
              d:DesignHeight="300" d:DesignWidth="300"
              Name="SOFSearch">
 	<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="7*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Row="0">
-            <TextBlock Text="SOF Search" HorizontalAlignment="Center" Margin="0 10 0 0"/>
-            <Grid Margin="10 10 10 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="7*"/>
+		</Grid.RowDefinitions>
+		<StackPanel Orientation="Vertical" Grid.Row="0">
+			<TextBlock Text="SOF Search" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+			<Grid Margin="10 10 10 0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="4*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<TextBox Grid.Column="0" 
                          x:Name="txtSearch"
                          Padding="3"/>
-                <Button Grid.Column="1" 
+				<Button Grid.Column="1" 
                             x:Name="btnSearch" 
                             Content="Search"
                             Padding="4" Click="btnSearch_Click"/>
-            </Grid>
-        </StackPanel>
-        <DockPanel Grid.Row="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                <ItemsControl x:Name="icSearchItems">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                                <Border BorderThickness="1" BorderBrush="DimGray" CornerRadius="10" Padding="10" Margin="5">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding Title}" 
+			</Grid>
+		</StackPanel>
+		<DockPanel Grid.Row="1">
+			<ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+				<ItemsControl x:Name="icSearchItems">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Border BorderThickness="1" BorderBrush="DimGray" CornerRadius="10" Padding="10" Margin="5">
+								<StackPanel Orientation="Vertical">
+									<TextBlock Text="{Binding Title}" 
                                            FontSize="24" 
                                            FontWeight="DemiBold"
                                            TextWrapping="WrapWithOverflow"/>
 
-                                        <Grid Margin="0 20 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+									<Grid Margin="0 20 0 0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
 
-                                            <DockPanel Grid.Column="0" HorizontalAlignment="Left">
-                                                <TextBlock Text="Answers: " FontWeight="DemiBold" />
-                                                <TextBlock Text="{Binding AnswerCount}"/>
-                                            </DockPanel>
+										<DockPanel Grid.Column="0" HorizontalAlignment="Left">
+											<TextBlock Text="Answers: " FontWeight="DemiBold" />
+											<TextBlock Text="{Binding AnswerCount}"/>
+										</DockPanel>
 
-                                            <DockPanel Grid.Column="2" HorizontalAlignment="Center">
-                                                <TextBlock Text="Score: " FontWeight="DemiBold"/>
-                                                <TextBlock Text="{Binding Score}"/>
-                                            </DockPanel>
+										<DockPanel Grid.Column="2" HorizontalAlignment="Center">
+											<TextBlock Text="Score: " FontWeight="DemiBold"/>
+											<TextBlock Text="{Binding Score}"/>
+										</DockPanel>
 
-                                            <DockPanel Grid.Column="1" HorizontalAlignment="Center">
-                                                <TextBlock Text="View Count: " FontWeight="DemiBold" />
-                                                <TextBlock Text="{Binding ViewCount}"/>
-                                            </DockPanel>
+										<DockPanel Grid.Column="1" HorizontalAlignment="Center">
+											<TextBlock Text="View Count: " FontWeight="DemiBold" />
+											<TextBlock Text="{Binding ViewCount}"/>
+										</DockPanel>
 
-                                            <DockPanel Grid.Column="3" HorizontalAlignment="Right">
-                                                <TextBlock Text="Answered: " FontWeight="DemiBold"/>
-                                                <TextBlock Text="{Binding IsAnswered}"/>
-                                            </DockPanel>
-                                        </Grid>
+										<DockPanel Grid.Column="3" HorizontalAlignment="Right">
+											<TextBlock Text="Answered: " FontWeight="DemiBold"/>
+											<TextBlock Text="{Binding IsAnswered}"/>
+										</DockPanel>
+									</Grid>
 
-                                        <Grid Margin="0 10 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" HorizontalAlignment="Left">
+									<Grid Margin="0 10 0 0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock Grid.Column="0" HorizontalAlignment="Left">
                                                     <Button Content="View"
 															x:Name="btnView" 
                                                             Tag="{Binding QuestionId}" 
@@ -91,20 +90,19 @@
                                                             </Style>
                                                         </Button.Resources>
                                                     </Button>
-                                            </TextBlock>
-                                            <TextBlock Grid.Column="1" HorizontalAlignment="Right">
+										</TextBlock>
+										<TextBlock Grid.Column="1" HorizontalAlignment="Right">
                                                 <Hyperlink NavigateUri="{Binding Link}" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="Underline">
                                                     Go To Site
                                                 </Hyperlink>
-                                            </TextBlock>
-                                        </Grid>
-                                    </StackPanel>
-                                </Border>
-                            </ScrollViewer>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </DockPanel>
-    </Grid>
+										</TextBlock>
+									</Grid>
+								</StackPanel>
+							</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+		</DockPanel>
+	</Grid>
 </UserControl>

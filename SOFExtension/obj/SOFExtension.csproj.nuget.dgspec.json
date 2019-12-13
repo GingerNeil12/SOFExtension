@@ -1,27 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\SOFExtension.csproj": {}
+    "C:\\Users\\neil.earlam.INTERNAL\\source\\repos\\SOFExtension\\SOFExtension\\SOFExtension.csproj": {}
   },
   "projects": {
-    "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\SOFExtension.csproj": {
+    "C:\\Users\\neil.earlam.INTERNAL\\source\\repos\\SOFExtension\\SOFExtension\\SOFExtension.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
+        "projectUniqueName": "C:\\Users\\neil.earlam.INTERNAL\\source\\repos\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
         "projectName": "SOFExtension",
-        "projectPath": "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
-        "packagesPath": "C:\\Users\\neile\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\neile\\OneDrive\\Documents\\Visual Studio 2019\\Projects\\SOFExtension\\SOFExtension\\obj\\",
+        "projectPath": "C:\\Users\\neil.earlam.INTERNAL\\source\\repos\\SOFExtension\\SOFExtension\\SOFExtension.csproj",
+        "packagesPath": "C:\\Users\\neil.earlam.INTERNAL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\neil.earlam.INTERNAL\\source\\repos\\SOFExtension\\SOFExtension\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
-          "C:\\Users\\neile\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\neil.earlam.INTERNAL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net472"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 18.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
