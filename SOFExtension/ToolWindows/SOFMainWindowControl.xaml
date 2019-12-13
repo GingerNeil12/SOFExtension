@@ -35,7 +35,7 @@
                 <ItemsControl x:Name="icSearchItems">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
                                 <Border BorderThickness="1" BorderBrush="DimGray" CornerRadius="10" Padding="10" Margin="5">
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="{Binding Title}" 

@@ -1,7 +1,7 @@
 ﻿using SOFExtension.Models;
 using SOFExtension.Services;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -19,23 +19,15 @@ namespace SOFExtension.ToolWindows
         private readonly string _query;
 
         private Client _client;
-        private SOFQuestionModel.Item Question;
-        public List<SOFAnswerModel.Answer> Answers;
 
         public ViewDetail(long questionId, string query)
         {
             InitializeComponent();
-            InitializeBindings();
 
             _questionId = questionId;
             _query = query;
 
             OnStart();
-        }
-
-        private void InitializeBindings()
-        {
-            Answers = new List<SOFAnswerModel.Answer>();
         }
 
         private void OnStart()
@@ -51,6 +43,8 @@ namespace SOFExtension.ToolWindows
             if(model != null) {
                 txtTitle.Text = model.Question.Title;
                 txtBody.Text = model.Question.BodyMarkdown;
+                hlLink.NavigateUri = new Uri( model.Question.Link);
+                icAnswers.ItemsSource = model.Answers;
                 return true;
             }
             return false;
@@ -65,6 +59,7 @@ namespace SOFExtension.ToolWindows
             model = HtmlParser( model );
             txtTitle.Text = model.Title;
             txtBody.Text = model.BodyMarkdown;
+            hlLink.NavigateUri = new Uri( model.Link );
 
             QuestionCacheModel cacheModel = new QuestionCacheModel() {
                 QuestionId = model.QuestionId,
@@ -94,6 +89,15 @@ namespace SOFExtension.ToolWindows
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             this.Content = new SOFMainWindowControl(_query);
+        }
+
+        private void Hyperlink_RequestNavigate( object sender, System.Windows.Navigation.RequestNavigateEventArgs e )
+        {
+            var ps = new ProcessStartInfo( e.Uri.AbsoluteUri ) {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start( ps );
         }
     }
 }
