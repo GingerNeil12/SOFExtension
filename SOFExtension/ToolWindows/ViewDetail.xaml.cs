@@ -22,13 +22,6 @@ namespace SOFExtension.ToolWindows
         private SOFQuestionModel.Item Question;
         public List<SOFAnswerModel.Answer> Answers;
 
-        public string Title { get; set; }
-        public string Link { get; set; }
-        public string Body { get; set; }
-        public string BodyMarkdown { get; set; }
-        public int AnswerCount { get; set; }
-        public int ViewCount { get; set; }
-
         public ViewDetail(long questionId, string query)
         {
             InitializeComponent();
@@ -42,7 +35,6 @@ namespace SOFExtension.ToolWindows
 
         private void InitializeBindings()
         {
-            _client = new Client();
             Answers = new List<SOFAnswerModel.Answer>();
         }
 
@@ -57,25 +49,22 @@ namespace SOFExtension.ToolWindows
         {
             var model = NaiveCache.GetQuestionModel(_questionId);
             if(model != null) {
-                Question = model.Question;
-                Answers = model.Answers;
+                txtTitle.Text = model.Question.Title;
+                txtBody.Text = model.Question.BodyMarkdown;
                 return true;
             }
             return false;
         }
 
         private async Task LoadQuestionFromStackoverflow()
-        { 
+        {
+            _client = new Client();
             var result = await _client.GetQuestionResultAsync( _questionId );
            
             var model = result.Items.FirstOrDefault();
             model = HtmlParser( model );
-            Title = model.Title;
-            Link = model.Link;
-            Body = model.Body;
-            BodyMarkdown = model.BodyMarkdown;
-            AnswerCount = model.AnswerCount;
-            ViewCount = model.ViewCount;
+            txtTitle.Text = model.Title;
+            txtBody.Text = model.BodyMarkdown;
 
             QuestionCacheModel cacheModel = new QuestionCacheModel() {
                 QuestionId = model.QuestionId,
@@ -88,8 +77,9 @@ namespace SOFExtension.ToolWindows
 
         private async Task LoadAnswersFromStackoverflow(QuestionCacheModel cacheModel)
         {
+            _client = new Client();
             var result = await _client.GetAnswersResultAsync( _questionId );
-            // Append to the item control
+            icAnswers.ItemsSource = result.Items;
             cacheModel.Answers = result.Items;
             NaiveCache.AddQuestionModel( cacheModel );
         }
@@ -97,6 +87,7 @@ namespace SOFExtension.ToolWindows
         private SOFQuestionModel.Item HtmlParser(SOFQuestionModel.Item model)
         {
             model.Title = WebUtility.HtmlDecode( model.Title );
+            model.BodyMarkdown = WebUtility.HtmlDecode( model.BodyMarkdown );
             return model;
         }
 

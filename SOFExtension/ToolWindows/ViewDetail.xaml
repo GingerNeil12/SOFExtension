@@ -9,20 +9,57 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnBack"
-                Grid.Row="0"
+        <DockPanel Grid.Row="0">
+            <Button x:Name="btnBack"
                 Content="Back" 
                 Click="btnBack_Click"
                 Padding="5" 
                 Background="DarkSlateBlue"
                 Foreground="White"/>
-        <StackPanel Grid.Row="1" Margin="10 10 10 0">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                <TextBlock Text="{Binding Title}"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Margin="10 10 10 0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          CanContentScroll="True">
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <TextBlock x:Name="txtTitle"
+                           FontSize="18"
+                           FontWeight="DemiBold"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"/>
+                    <TextBlock x:Name="txtBody"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="0 10"/>
+                    <ItemsControl x:Name="icAnswers">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="DimGray" CornerRadius="10" Padding="10" Margin="5">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding BodyMarkdown}" TextWrapping="Wrap"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <DockPanel HorizontalAlignment="Left" Grid.Column="0">
+                                                <TextBlock Text="Score: "/>
+                                                <TextBlock Text="{Binding Score}"/>
+                                            </DockPanel>
+                                            
+                                            <DockPanel HorizontalAlignment="Right" Grid.Column="1">
+                                                <TextBlock Text="Accepted: "/>
+                                                <TextBlock Text="{Binding IsAccepted}"/>
+                                            </DockPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </ScrollViewer>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

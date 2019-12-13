@@ -28,10 +28,11 @@ namespace SOFExtension.Services
             using(_client = new HttpClient(_handler)) {
                 _client.BaseAddress = new Uri( BASE_URI );
                 var uri = $"search?order=desc&sort=activity&site=stackoverflow&intitle={search}";
-                var responseMessage = await _client.GetAsync( uri );
-                using(var responseStream = await responseMessage.Content.ReadAsStreamAsync() ) {
-                    using(var reader = new StreamReader(responseStream) ) {
-                        stringResult = await reader.ReadToEndAsync();
+                using(var response = await _client.GetAsync( uri ) ) {
+                    using ( var stream = await response.Content.ReadAsStreamAsync() ) {
+                        using ( var reader = new StreamReader( stream ) ) {
+                            stringResult = await reader.ReadToEndAsync();
+                        }
                     }
                 }
             }
@@ -45,10 +46,11 @@ namespace SOFExtension.Services
             using(_client = new HttpClient( _handler ) ) {
                 _client.BaseAddress = new Uri( BASE_URI );
                 var uri = $"questions/{id}?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wwK0y";
-                var responseMessage = await _client.GetAsync( uri );
-                using(var responseStream = await responseMessage.Content.ReadAsStreamAsync() ) {
-                    using(var reader = new StreamReader( responseStream ) ) {
-                        stringResult = await reader.ReadToEndAsync();
+                using(var response = await _client.GetAsync( uri ) ) {
+                    using ( var stream = await response.Content.ReadAsStreamAsync() ) {
+                        using ( var reader = new StreamReader( stream ) ) {
+                            stringResult = await reader.ReadToEndAsync();
+                        }
                     }
                 }
             }
@@ -62,11 +64,16 @@ namespace SOFExtension.Services
             using(_client = new HttpClient( _handler ) ) {
                 _client.BaseAddress = new Uri( BASE_URI );
                 var uri = $"questions/{id}/answers?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wzfpy";
-                var responseMessage = await _client.GetAsync( uri );
-                using(var responseStream = await responseMessage.Content.ReadAsStreamAsync() ) {
-                    using(var reader = new StreamReader( responseStream ) ) {
-                        stringResult = await reader.ReadToEndAsync();
+                try {
+                    using ( var response = await _client.GetAsync( uri ) ) {
+                        using ( var stream = await response.Content.ReadAsStreamAsync() ) {
+                            using ( var reader = new StreamReader( stream ) ) {
+                                stringResult = await reader.ReadToEndAsync();
+                            }
+                        }
                     }
+                } catch ( Exception ex ) {
+                    throw;
                 }
             }
             var result = JsonConvert.DeserializeObject<SOFAnswerModel>( stringResult );
